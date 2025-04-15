@@ -37,5 +37,8 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+app.listen(9000, () => {
+  console.log("The application is running on localhost:9000");
+});
 
 module.exports = app;
