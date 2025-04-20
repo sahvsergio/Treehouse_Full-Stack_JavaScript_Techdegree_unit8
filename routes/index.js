@@ -17,13 +17,17 @@ router.get("/books/:id  ", function (req, res, next) {
 });
 
 
-/* GET routes */
+/* POST routes */
 
 router.post("books/new", function (req, res, next) {
   res.render("index", { title: "Books" });
 });
-
-
+router.post("books/:id", function (req, res, next) {
+  res.render("index", { title: "Books" });
+});
+router.post("books/:id/delete", function (req, res, next) {
+  res.render("index", { title: "Books" });
+});
 
 
 module.exports = router;
