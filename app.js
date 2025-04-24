@@ -7,6 +7,25 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
+const dbModule = require("./models");
+const sequelize = dbModule.sequelize;
+const models = dbModule.models;
+
+(async () => {
+  try {
+    // Test the connection to the database
+    await sequelize.authenticate();
+    console.log('Connection to the database successful!');
+
+    // Sync the models
+    console.log('Synchronizing the models with the database...');
+    await sequelize.sync({ force: true });
+    console.log('Hello');
+  } catch(error) {
+    console.log(error);
+  }
+})();
+
 var app = express();
 
 // view engine setup

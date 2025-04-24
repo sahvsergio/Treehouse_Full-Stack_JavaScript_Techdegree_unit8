@@ -3,14 +3,14 @@ var router = express.Router();
 /* GET routes */
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Books' });
+  res.redirect('/books');
 });
 router.get("/books", function (req, res, next) {
-  res.render("index", { title: "Books" });
+  res.render("index", { title: "update books" });
 });
 
 router.get("/books/new", function (req, res, next) {
-  res.render("index", { title: "Books" });
+  res.render("new-book", { title: "Books" });
 });
 router.get("/books/:id  ", function (req, res, next) {
   res.render("update-book", { title: "Update a book" });
