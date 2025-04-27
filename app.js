@@ -10,6 +10,7 @@ var usersRouter = require('./routes/users');
 const dbModule = require("./models");
 const sequelize = dbModule.sequelize;
 const models = dbModule.models;
+// use async and await to connect to the database
 
 (async () => {
   try {
@@ -19,7 +20,7 @@ const models = dbModule.models;
 
     // Sync the models
     console.log('Synchronizing the models with the database...');
-    await sequelize.sync({ force: true });
+    await sequelize.sync();
     console.log('Hello');
   } catch(error) {
     console.log(error);
@@ -43,6 +44,9 @@ app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
+  let err=new Error('Oops, page not found');
+  err.status=404;
+  res.render("error");
   next(createError(404));
 });
 
