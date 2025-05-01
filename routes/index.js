@@ -28,7 +28,12 @@ router.get("/books/new", function (req, res, next) {
 router.get("/books/:id", function (req, res, next) {
   let book =Book.findByPk(req.params.id);
   book.then((bookInfo)=>{
+    if(bookInfo){
     res.render("update-book", { title: "Update a book" , book:bookInfo});
+    }
+    else{
+      res.status(404).render("error")
+    }
     
 
 
