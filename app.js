@@ -62,7 +62,7 @@ app.use(function (err, req, res, next) {
      res.render("form-error", { book:req.body,error: err }); 
    }
    else{
-  res.render("error", {err:error});
+  res.render("error", {error:err});
    }
 });
 app.listen(9000, () => {

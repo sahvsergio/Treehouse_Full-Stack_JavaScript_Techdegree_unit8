@@ -34,10 +34,9 @@ router.get("/books/:id", function (req, res, next) {
       if (bookInfo) {
         res.render("update-book", { title: "Update a book", book: bookInfo });
       } else {
-        let err=new Error('Oops No Book found');
-        err.status=404
-        res.render('page-not-found',{error:err});
-       
+        let err = new Error("Oops No Book found");
+        err.status = 404;
+        res.render("page-not-found", { error: err });
       }
     });
 });
@@ -51,20 +50,28 @@ router.post("/books/new", function (req, res, next) {
     })
     .catch((err) => {
       if (err.name === "SequelizeValidationError") {
-        next(err)
-       
-      }
-      else{
-        next(err)
+        next(err);
+      } else {
+        next(err);
       }
     });
-  });
-        
-        
- 
+});
 
 router.post("/books/:id", function (req, res, next) {
-  res.render("update", { title: "Books" });
+ Book.findByPk(req.params.id)
+ .then((updatedBook)=>{
+  if(updatedBook){
+    updatedBook.update(req.body);
+    
+
+  }
+
+
+ }).catch((err)=>{
+
+  console.log(err);
+ });
+ res.redirect("/");
 });
 
 router.post("/books/:id/delete", function (req, res, next) {
