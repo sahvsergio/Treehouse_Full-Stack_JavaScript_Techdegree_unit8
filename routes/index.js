@@ -61,23 +61,24 @@ router.post("/books/:id", function (req, res, next) {
   Book.findByPk(req.params.id)
     .then((updatedBook) => {
       if (updatedBook) {
-        updatedBook.update(req.body).then(
-         res.redirect("/"))
-      }
-      else{
-        let err=new Error('No book found to update');
-        err.status=404;
+        return updatedBook.update(req.body).then(() => {
+          res.redirect("/");
+        });
+      } else {
+        let err = new Error("No book found to update");
+        err.status = 404;
         throw err;
       }
-    }).
-    catch((err) => {
+    })
+    .catch((err) => {
       if (err.name === "SequelizeValidationError") {
-        res.render('update-book', {book: updatedBook,error:err});
+        Book.findByPk(req.params.id).then((book) => {
+          res.render("update-book", { book: book, error: err });
+        });
       } else {
         next(err);
       }
     });
- 
 });
 
 router.post("/books/:id/delete", function (req, res, next) {
