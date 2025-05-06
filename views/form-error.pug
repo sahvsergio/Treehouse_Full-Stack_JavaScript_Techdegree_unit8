@@ -1,10 +1,10 @@
 extends layout
 
+
 block content
-  h1 New Book
+  if error
   
-    if error
-      h2.error Oooops!
+    h2.error Oooops!
       ul.error 
         li= error.message
     

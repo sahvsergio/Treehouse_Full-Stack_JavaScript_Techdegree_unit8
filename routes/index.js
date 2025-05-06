@@ -58,20 +58,16 @@ router.post("/books/new", function (req, res, next) {
 });
 
 router.post("/books/:id", function (req, res, next) {
- Book.findByPk(req.params.id)
- .then((updatedBook)=>{
-  if(updatedBook){
-    updatedBook.update(req.body);
-    
-
-  }
-
-
- }).catch((err)=>{
-
-  console.log(err);
- });
- res.redirect("/");
+  Book.findByPk(req.params.id)
+    .then((updatedBook) => {
+      if (updatedBook) {
+        updatedBook.update(req.body);
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  res.redirect("/");
 });
 
 router.post("/books/:id/delete", function (req, res, next) {
@@ -81,8 +77,15 @@ router.post("/books/:id/delete", function (req, res, next) {
         deletedBook.destroy();
         res.redirect("/");
       }
+      else{
+        let err=new Error('No book to delete');
+        err.status=404;
+        throw err;
+        
+
+}
     })
-    .catch();
+    
 });
 
 module.exports = router;
