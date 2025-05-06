@@ -1,10 +1,9 @@
-extends layout
 
 
 block content
-  if error
   
-    h2.error Oooops!
+  
+    if error
+      h2.error Oooops!
       ul.error 
         li= error.message
-    

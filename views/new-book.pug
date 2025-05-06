@@ -1,9 +1,13 @@
 extends layout
 
+
+
 block content
   h1 New Book
   form(action='/books/new', method="POST")
-    include form-error
+    
+   
+    
     p 
       label(for="title") Title
       input#title(type="text", name="title")

@@ -58,13 +58,11 @@ app.use(function (err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-   if (err.name === "SequelizeValidationError"){
-     res.render("form-error", { book:req.body,error: err }); 
-   }
-   else{
+
   res.render("error", {error:err});
-   }
+   
 });
+
 app.listen(9000, () => {
   console.log("The application is running on localhost:9000");
 });
